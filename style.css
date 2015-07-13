@@ -1,0 +1,208 @@
+*, *:before, *:after {
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: url("http://www.designbolts.com/wp-content/uploads/2012/12/Tiny-Grid-Seamless-Patterns-For-Website-Backgrounds.jpg") repeat;
+    font-family: 'Quicksand', sans-serif;
+}
+h2 {
+  font-family: 'Vast Shadow', cursive;
+  color: #297373;
+}
+h2 > small { 
+    text-transform: uppercase;
+}
+.columnsContainer { position: relative; margin: .5em; }
+.leftColumn, .rightColumn {  border: 1px solid  #ccc; padding: 1.25em; }
+
+.leftColumn, .rightColumn {
+    margin-bottom: 100px;
+    background: #fff;
+}
+.container-fluid {
+    margin-top: 50px;
+}
+.badge {
+    background-color: #ccc;
+    color: #000;
+    font-weight: normal;
+}
+
+footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   background:#eee;
+   padding: 5px;
+   border-top: solid 1px #CCC;
+}
+
+.navigation {
+    list-style: none;
+    margin: 0;
+    background: #333;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: flex-end;
+    position: fixed;
+    top:0px;
+    width:100%;
+    z-index: 100;
+
+}
+
+.navigation a {
+    text-decoration: none;
+    display: block;
+    padding: 1em;
+    color: white;
+}
+
+.navigation a:hover {
+    background: #FE5F55;
+}
+
+@media all and (max-width: 800px) {
+  .navigation {
+    justify-content: space-around;
+  }
+}
+@media all and (max-width: 600px) {
+    .container-fluid {
+        margin-top: 170px;
+    }
+    .navigation {
+        -webkit-flex-flow: column wrap;
+        flex-flow: column wrap;
+        padding: 0;
+    }
+    .navigation a {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .navigation li:last-of-type a {
+        border-bottom: none;
+    }
+}
+
+/* MEDIA QUERIES */
+@media screen and (min-width: 47.5em ) {
+    .leftColumn { margin-right: 19.5em; }
+	.rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; }   
+}
+/**********/
+
+
+
+.tag {
+    background: #eee;
+    border-radius: 3px 0 0 3px;
+    color: #999;
+    font-size: 12px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 15px 0 10px;
+    position: relative;
+    margin: 5px 5px 5px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+}
+
+.tag::after {
+    background: #fff;
+    border-bottom: 10px solid transparent;
+    border-left: 7px solid #eee;
+    border-top: 10px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.tag:hover {
+    background-color: #ccc;
+    color: white;
+    text-decoration: none;
+}
+
+.tag:active, .tag:focus  {
+    color: #999;
+    text-decoration: none;  
+}
+
+.tag:hover::after {
+   border-left-color: #ccc; 
+}
+
+.gray-tag {
+    background-color: #5CA4A9;
+    height: 26px;
+    color: #fff;
+    line-height: 26px;
+    margin: 0px 5px 5px 0;
+}
+
+.gray-tag::after {
+    background: #fff;
+    border-bottom: 13px solid transparent;
+    border-left: 10px solid #5CA4A9;
+    border-top: 13px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.gray-tag:hover {
+    background-color: #297373; 
+}
+.gray-tag:active, .gray-tag:focus {
+    color: white;
+    text-decoration: none;  
+}
+
+.gray-tag:hover::after {
+   border-left-color: #297373; 
+}
+.gray-tag > .badge {
+    background: #fff;
+    color: #666;
+    padding: 2px 4px;
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.narrow {
+	width: 100px;
+    vertical-align: middle !important;
+}
+.page {
+    margin-right: 5px;
+}
+.pager-container {
+    margin: 10px auto 10px auto;
+    width: 180px;
+}
+
+.table tr:first-child td {
+    border-top: none;
+}
+
+.small-link {
+    font-size: 13px;
+}
+
+.form-control {
+    border-radius: 30px;
+    height: 30px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
