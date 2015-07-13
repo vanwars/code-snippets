@@ -1,5 +1,5 @@
-define(["underscore", "jquery", "backbone"],
-    function (_, $, Backbone) {
+define(["underscore", "jquery", "backbone", "model"],
+    function (_, $, Backbone, Model) {
         "use strict";
         /**
          * An "abstract" Backbone Collection; the root of all of the other
@@ -15,6 +15,12 @@ define(["underscore", "jquery", "backbone"],
             count: 0,
             page_size: 100,
             opts: null,
+            enableFiltering: false,
+            dataAttribute: "results",
+            dataType: "json",
+            nextURL: "next",
+            filterFields: [],
+            model: Model,
             defaults: {
                 isVisible: true
             },
@@ -28,23 +34,25 @@ define(["underscore", "jquery", "backbone"],
                 }
                 return this.api_url;
             },
+            sync : function (method, collection, options) {
+                options.dataType = this.dataType;
+                return Backbone.sync(method, collection, options);
+            },
             parse: function (response) {
                 this.count = response.count;
-                this.next = response.next;
+                this.next = eval("response." + this.nextURL);
                 this.previous = response.previous;
-                return response.results;
+                return eval("response." + this.dataAttribute);
             },
             filter: function (filterVal) {
-                _.each(this.models, function (record) {
-                    if (record.get("tags") && record.get("tags").indexOf(filterVal) == -1) {
-                        record.set("hide", true);
-                    } else {
-                        record.set("hide", false);
-                    }
+                var that = this;
+                if (!this.enableFiltering) { return; }
+                this.each(function (model) {
+                    model.checkMatch(filterVal, that.filterFields);
                 });
             },
             getVisibleCollection: function () {
-                var collection = new Base(this.opts);
+                var collection = new Base();
                 this.each(function (item) {
                     if (!item.get("hide")) { collection.add(item); }
                 });

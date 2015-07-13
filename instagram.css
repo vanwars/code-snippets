@@ -1,0 +1,16 @@
+.thumbnail { 
+    display: inline-block;
+}    
+.instagram-thumb {
+	height: 300px;
+  	overflow-y: hidden;
+  	width: 160px;
+}
+.profile-thumb {
+	height: 220px;
+  	overflow-y: hidden;
+  	width: 110px;
+  	margin-left: 10px;
+}
+
+

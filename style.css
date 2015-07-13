@@ -164,7 +164,7 @@ footer {
 .gray-tag:hover {
     background-color: #297373; 
 }
-.gray-tag:active, .gray-tag:focus {
+.gray-tag:active, .gray-tag:focus, .badge > a {
     color: white;
     text-decoration: none;  
 }

@@ -78,18 +78,19 @@ define(["handlebars"],
             return newObject;
         };
 
-        Handlebars.registerHelper('tag_inventory', function (results, filterText) {
-            var tagDictionary = {},
-                tags,
+        Handlebars.registerHelper('tag_inventory', function (results, attribute) {
+            var that = this,
+                tagDictionary = {},
+                property,
                 template_html = '<a class="tag gray-tag" href="#/tags/{{ tag }}">{{ tag }} <span class="badge">{{ count }}</badge></a><br>',
                 template,
                 tagTemplate = '';
             _.each(results, function (result) {
-                tags = result.tags;
-                if (tags) {
-                    tags = tags.replace(/^\s+|\s+$/g, "").split(/\s*,\s*/);
-                    _.each(tags, function (tag) {
-                        if (!filterText || tag.indexOf(filterText) != -1) {
+                property = result[attribute];
+                if (property) {
+                    property = property.replace(/^\s+|\s+$/g, "").split(/\s*,\s*/);
+                    _.each(property, function (tag) {
+                        if (!that.filterVal || tag.indexOf(that.filterVal) != -1) {
                             if (!tagDictionary[tag]) {
                                 tagDictionary[tag] = 0;
                             }
@@ -105,6 +106,13 @@ define(["handlebars"],
                 tagTemplate += template;
             });
             return new Handlebars.SafeString(tagTemplate);
+        });
+
+        Handlebars.registerHelper('searchbox', function () {
+            var searchboxHTML = '<input id="filter" class="form-control" type="text" value="{{ filterVal }}" placeholder="Filter by Tag" />',
+                template = Handlebars.compile(searchboxHTML);
+            template = template({ filterVal: this.filterVal });
+            return new Handlebars.SafeString(template);
         });
 
 

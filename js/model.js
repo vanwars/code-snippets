@@ -23,6 +23,22 @@ define(["underscore", "backbone"],
                     return base + '.json';
                 }
                 return base.replace(/([^\/])$/, '$1/') + encodeURIComponent(this.id) + '/.json';
+            },
+
+            checkMatch: function (filterVal, filterFields) {
+                var val, that = this;
+                _.each(filterFields, function (field) {
+                    val = that.attributes[field];
+                    switch (typeof val) {
+                    case "string":
+                        if (val.indexOf(filterVal) == -1) {
+                            that.set("hide", true);
+                        } else {
+                            that.set("hide", false);
+                        }
+                        break;
+                    }
+                });
             }
 
         });

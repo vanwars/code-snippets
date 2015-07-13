@@ -29,7 +29,7 @@ define(["underscore",
                         v = new View(page);
                         $(page.target || that.defaultTargets).html(v.el);
                         v.delegateEvents();
-                        setTimeout(that.addListeners.bind(that), 1000);
+                        //setTimeout(that.addListeners.bind(that), 1000);
                     }
                 });
             },
@@ -81,67 +81,32 @@ define(["underscore",
                     view = new View(page);
                 $(page.target || this.defaultTarget).html(view.el);
                 view.delegateEvents();
-                this.executeTransition(page.target);
                 //remove and re-add event listeners:
                 this.addListeners();
-                this.highlightSelected(page);
-            },
-
-            executeTransition: function (target) {
-                switch (target) {
-                case this.defaultTarget:
-                    $("#explore_section").addClass("showme");
-                    break;
-                }
-            },
-
-            switchSpokes: function () {
-                var $target = $(this.spokesTarget);
-                $target.removeClass("original").addClass("hide-wheel-right");
-                setTimeout(function () {
-                    $target.removeClass("hide-wheel-right").addClass("hide-wheel-left");
-                    setTimeout(function () {
-                        $target.removeClass("hide-wheel-left").addClass("original");
-                    }, 40);
-                }, 500);
             },
 
             addListeners: function () {
-                var that = this;
-
-                $("#close-project").unbind("click");
-                $('#close-project').click(function (e) {
-                    $("#explore_section").removeClass("showme");
-                    e.preventDefault();
-                    that.appRouter.navigate('home', {trigger: true});
-                });
-
-                $(".nav-icon").unbind("click");
-                $('.nav-icon').click(function () {
-                    if ($(this).hasClass("load-spokes")) {
-                        that.switchSpokes();
-                    }
-                });
+                return;
             },
-            highlightSelected: function (page) {
-                var url = '#/' + page.url,
-                    $elem = $('a[href="' + url + '"]');
-                setTimeout(function () {
-                    if ($elem.length > 0) {
-                        $elem.addClass('active').siblings().removeClass('active');
-                    }
-                }, 500);
+
+            init: function () {
+                this.buildViews(this.pages);
+                this.buildRoutes(this.pages);
+                var AppRouter = Backbone.Router.extend({
+                    routes: this.routes
+                });
+                this.appRouter = new AppRouter();
+                Backbone.history.start();
             }
         });
 
-        App.addInitializer(function (opts) {
-            this.buildViews(opts.pages);
-            this.buildRoutes(opts.pages);
-            var AppRouter = Backbone.Router.extend({
-                routes: this.routes
-            });
-            this.appRouter = new AppRouter();
-            Backbone.history.start();
+        App.addInitializer(function () {
+            var that = this;
+            $.getJSON('../config.json',
+                function (data) {
+                    that.pages = data.pages;
+                    that.init();
+                });
         });
         return App;
     });

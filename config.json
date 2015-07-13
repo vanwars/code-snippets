@@ -1,0 +1,68 @@
+{
+    "pages": [
+        {
+            "template_path": "all_samples.tpl",
+            "target": "#content",
+            "type": "list",
+            "api_url": "http://dev.localground.org/api/0/forms/10/data/"
+        }, {
+            "template_path": "all_tags.tpl",
+            "target": ".rightColumn",
+            "type": "list",
+            "api_url": "http://dev.localground.org/api/0/forms/10/data/",
+            "query_params": {
+                "page_size": 100
+            },
+            "enable_filtering": true,
+            "filter_fields": ["tags"]
+        }, {
+            "url": "level/all",
+            "template_path": "all_samples.tpl",
+            "target": "#content",
+            "type": "list",
+            "api_url": "http://dev.localground.org/api/0/forms/10/data/"
+        }, {
+            "url": "level/:level",
+            "template_path": "all_samples.tpl",
+            "target": "#content",
+            "type": "list",
+            "api_url": "http://dev.localground.org/api/0/forms/10/data/",
+            "query_params": {
+                "query": "where level = '{{ level }}'"
+            }
+        }, {
+            "url": "tags/:tag",
+            "template_path": "all_samples.tpl",
+            "target": "#content",
+            "type": "list",
+            "api_url": "http://dev.localground.org/api/0/forms/10/data/",
+            "query_params": {
+                "query": "where tags like '%{{ tag }}%'"
+            }
+        }, {
+            "url": "instagram",
+            "data_type": "jsonp",
+            "template_path": "instagram_photos.tpl",
+            "data_attribute": "data",
+            "target": "#content",
+            "type": "list",
+            "next_url": "pagination.next_url",
+            "api_url": "https://api.instagram.com/v1/tags/mtshasta/media/recent",
+            "query_params": {
+                "access_token": "2114568991.564c163.9c58ce22e9034f81bb8ac3887aaa244e"
+            }
+        }, {
+            "url": "instagram/tags/:tag",
+            "data_type": "jsonp",
+            "template_path": "instagram_photos.tpl",
+            "data_attribute": "data",
+            "target": "#content",
+            "type": "list",
+            "next_url": "pagination.next_url",
+            "api_url": "https://api.instagram.com/v1/tags/{{ tag }}/media/recent",
+            "query_params": {
+                "access_token": "2114568991.564c163.9c58ce22e9034f81bb8ac3887aaa244e"
+            }
+        }
+    ]
+}

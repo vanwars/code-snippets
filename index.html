@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Grand+Hotel|Quicksand|Pompiere|Cabin+Sketch|Vast+Shadow|Londrina+Outline|Frijole|Grand+Hotel|Monoton|Gruppo|Raleway+Dots' rel='stylesheet' type='text/css'>
         <link href="style.css" rel="stylesheet" />
+        <link href="instagram.css" rel="stylesheet" />
   </head>
   
   <body>
@@ -39,15 +40,14 @@
     </div>
     
     <footer>
-  		<p>Footer</p>
   		<p>&copy;2015 Copyright info here...</p>
   	</footer>
     
     <script src="js/external/require.js"></script>
     <script src="js/require-config.js" type="text/javascript"></script>
     <script>
-        require(["init", "config"], function(App) {
-                App.start({pages: pages});
+        require(["init"], function(App) {
+                App.start();
             }
         );
     </script>

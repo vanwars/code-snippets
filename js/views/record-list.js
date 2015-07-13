@@ -20,16 +20,23 @@ define(["jquery",
             },
             opts: null,
             filterVal: null,
+            dataAttribute: "results",
 
             childViewContainer: '.data-container',
 
             initialize: function (opts) {
                 this.opts = opts;
+                this.dataAttribute = opts.data_attribute || "results";
                 this.collection = new Collection({
-                    api_url: opts.api_url,
-                    query_params: this.updateWithRouterData(opts),
+                    api_url: this.updateUrlWithRouterData(opts),
+                    query_params: this.updateParamsWithRouterData(opts),
                     page_size: opts.page_size || 10,
-                    comparator: opts.ordering_field || "id"
+                    comparator: opts.ordering_field || "id",
+                    enableFiltering: opts.enable_filtering || false,
+                    filterFields: opts.filter_fields || [],
+                    dataAttribute: this.dataAttribute,
+                    dataType: opts.data_type || "json",
+                    nextURL: opts.next_url || "next"
                 });
                 this.listenTo(this.collection, 'reset', this.renderWithHelpers);
                 this.loadTemplateFromFile(opts);
@@ -41,7 +48,12 @@ define(["jquery",
                 this.collection.trigger('reset');
             }, 500),
 
-            updateWithRouterData: function (opts) {
+            updateUrlWithRouterData: function (opts) {
+                var template = Handlebars.compile(opts.api_url);
+                return template(opts);
+            },
+
+            updateParamsWithRouterData: function (opts) {
                 if (!opts.query_params) {
                     return {};
                 }
@@ -110,10 +122,9 @@ define(["jquery",
             render: function () {
                 var data = {},
                     json = this.collection.getVisibleCollection().toJSON();
-                _.extend(data, { results: json });
                 _.extend(data, this.templateHelpers);
+                data[this.dataAttribute] = json;
                 this.$el.html(this.template(data));
-
                 this.focusCursorIfSearchbox();
             }
 

@@ -9,16 +9,18 @@
 <table class="table">
 {{#results}}
 	<tr>
-      <td class="narrow"><span class="badge">{{level}}</span></td>
-      <td>
-		<strong><a href="{{example_url}}" target="_blank">{{ description }}</a></strong>
-		<br>
-		{{tagify tags}}
-        {{#if source }}
+        <td class="narrow">
+            <span class="badge"><a href="#/level/{{level}}">{{level}}</a></span>
+        </td>
+        <td>
+            <strong><a href="{{example_url}}" target="_blank">{{ description }}</a></strong>
             <br>
-            <a class="small-link" href="{{source}}">learn more...</a>
-        {{/if }}
-      </td>
+            {{tagify tags}}
+            {{#if source }}
+                <br>
+                <a class="small-link" href="{{source}}" target="_blank">learn more...</a>
+            {{/if }}
+        </td>
 	</tr>
 {{/results}}
 </table>
