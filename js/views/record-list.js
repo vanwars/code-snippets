@@ -123,6 +123,7 @@ define(["jquery",
                 var data = {},
                     json = this.collection.getVisibleCollection().toJSON();
                 _.extend(data, this.templateHelpers);
+                _.extend(data, this.opts);
                 data[this.dataAttribute] = json;
                 this.$el.html(this.template(data));
                 this.focusCursorIfSearchbox();

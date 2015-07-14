@@ -1,6 +1,6 @@
 <!-- List Display -->
 {{#if tag}}<h2>Tag: <small>{{ tag }}</small></h2>{{/if }}
-{{#if level}}<h2>Level: {{ level }}</h2>{{/if }}
+{{#if level}}<h2>Level: <small>{{ level }}</small></h2>{{/if }}
 
 <!-- Pagination -->
 {{ paginator }}
