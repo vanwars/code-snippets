@@ -102,7 +102,7 @@ define(["underscore",
 
         App.addInitializer(function () {
             var that = this;
-            $.getJSON('../config.json',
+            $.getJSON('config.json',
                 function (data) {
                     that.pages = data.pages;
                     that.init();
